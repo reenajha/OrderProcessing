@@ -9,16 +9,45 @@ namespace OrderProcessing
     {
         static void Main(string[] args)
         {
-            PaymentClient payment;
+            
 
             Console.WriteLine("\r\n------------This is Order Processing Application----------------");
-            payment = new PaymentClient(new Payment(), new Product { category = "physical", type = "book" });
-            payment.ProcessOrder();
+            Console.WriteLine("Do you want to Order the proudct or Activate Membership");
+            var options =  int.Parse(Console.ReadLine());
 
-            payment = new PaymentClient(new Payment(), new Product { category = "membership", type = "activate" });
-            payment.ProcessMembership();
+            Console.WriteLine("Enter Category");
+            var category = Console.ReadLine().ToLower();
+
+            Console.WriteLine("Enter Proudct Type");
+            var productType = Console.ReadLine().ToLower();
+
+            StartOrderProcessing(options, category, productType);
+        }
+
+        public static Boolean StartOrderProcessing(int option,string category,string productType)
+        {
+            PaymentClient payment;
+
+            switch(option)
+            {
+                case 1:
+                    payment = new PaymentClient(new Payment(), new Product { category = category, type = productType });
+                    payment.ProcessOrder();
+                    break;
+                case 2 :
+                    payment = new PaymentClient(new Payment(), new Product { category = category, type = productType });
+                    payment.ProcessMembership();
+                    break;
+
+                default: Console.WriteLine("Please choose correct option");
+                    break;
+            }         
 
             Console.ReadLine();
+
+            return true;
         }
     }
+
+   
 }
