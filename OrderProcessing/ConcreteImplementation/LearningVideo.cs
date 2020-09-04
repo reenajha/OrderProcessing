@@ -10,10 +10,24 @@ namespace OrderProcessing.ConcreteImplementation
     public class LearningVideo : PhysicalProduct
     {
 
-        public override void Run()
+        public override bool Run()
         {
-            base.GenerateSlip();
-            Console.WriteLine("Add First Aid Video");
+            bool returnResult = false;
+            try
+            {
+                returnResult = base.GenerateSlip();
+                if (returnResult)
+                {
+                    Console.WriteLine("Add First Aid Video");
+                }
+
+            }
+            catch (Exception)
+            {
+                //logic to log error
+                returnResult = false;
+            }
+            return returnResult;
         }
     }
 }

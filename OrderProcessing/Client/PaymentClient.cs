@@ -31,17 +31,37 @@ namespace OrderProcessing.Client
 
         }
 
-        public void ProcessOrder()
+        public bool ProcessOrder()
         {
-            physicalProduct.Run();
+            bool returnResult = false;
+            try
+            {
+                returnResult = physicalProduct.Run();
+            }
+            catch (Exception)
+            {
+                //logic to log error
+                returnResult = false;
+            }
+            return returnResult;
+
+
         }
 
-        public void ProcessMembership()
+        public bool ProcessMembership()
         {
-            membership.Run();
+            bool returnResult = false;
+            try
+            {
+                returnResult = membership.Run();
+            }
+            catch (Exception)
+            {
+                //logic to log error
+                returnResult = false;
+            }
+            return returnResult;
+
         }
-
-
-
     }
 }

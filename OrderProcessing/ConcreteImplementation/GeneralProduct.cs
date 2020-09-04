@@ -5,15 +5,28 @@ using System.Text;
 
 namespace OrderProcessing.ConcreteImplementation
 {
-    
+
     //concrete product 
     public class GeneralProduct : PhysicalProduct
     {
 
-        public override void Run()
+        public override bool Run()
         {
-            base.GenerateSlip();
-            base.GenerateCommissionPayment();
+            bool returnResult = false;
+            try
+            {
+                returnResult = base.GenerateSlip();
+                if (returnResult)
+                {
+                    returnResult = base.GenerateCommissionPayment();
+                }
+            }
+            catch (Exception)
+            {
+                //logic to log error
+                returnResult = false;
+            }
+            return returnResult;
         }
     }
 }

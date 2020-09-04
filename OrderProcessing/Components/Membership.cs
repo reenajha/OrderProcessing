@@ -6,10 +6,21 @@ namespace OrderProcessing.Components
 {
     public abstract class Membership
     {
-        public void SendEmail()
+        public bool SendEmail()
         {
-            Console.WriteLine("Send Email");
+            bool returnResult = false;
+            try
+            {
+                returnResult = true;
+                Console.WriteLine("Send Email");
+            }
+            catch (Exception)
+            {
+                //logic to log error
+                returnResult = false;
+            }
+            return returnResult;
         }
-        abstract public void Run();
+        abstract public bool Run();
     }
 }

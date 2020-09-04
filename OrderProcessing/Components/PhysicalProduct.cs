@@ -6,15 +6,38 @@ namespace OrderProcessing.Components
 {
     public abstract class PhysicalProduct
     {
-        public void GenerateSlip()
+        public bool GenerateSlip()
         {
-            Console.WriteLine("Generate Slip");
+            bool returnResult = false;
+            try
+            {
+                returnResult = true;
+                Console.WriteLine("Generate Slip");
+            }
+            catch (Exception)
+            {
+                //logic to log error
+                returnResult = false;
+            }
+            return returnResult;
         }
 
-        public void GenerateCommissionPayment()
+        public bool GenerateCommissionPayment()
         {
-            Console.WriteLine("Generate Commission Payment ");
+            bool returnResult = false;
+            try
+            {
+                returnResult = true;
+                Console.WriteLine("Generate Commission Payment ");
+            }
+            catch (Exception)
+            {
+                //logic to log error
+                returnResult= false;
+
+            }
+            return returnResult;
         }
-        abstract public void Run();
+        abstract public bool Run();
     }
 }

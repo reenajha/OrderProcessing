@@ -8,11 +8,25 @@ namespace OrderProcessing.ConcreteImplementation
     //concrete product Book
     public class Book : PhysicalProduct
     {
-        public override void Run()
+        public override bool Run()
         {
-            base.GenerateSlip();
-            base.GenerateCommissionPayment();
-            Console.WriteLine("Generate Duplicate Slip");
+            bool returnResult = false;
+            try
+            {
+                returnResult = base.GenerateSlip();
+                if (returnResult)
+                {
+                    returnResult = base.GenerateCommissionPayment();
+                }
+                Console.WriteLine("Generate Duplicate Slip");
+            }
+            catch (Exception)
+            {
+                //logic to log error
+                returnResult = false;
+            }
+            return returnResult;
+
         }
     }
 }

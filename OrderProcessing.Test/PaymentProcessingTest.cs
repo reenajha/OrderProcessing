@@ -1,7 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OrderProcessing.Client;
-using OrderProcessing.Components;
-using OrderProcessing.Models;
 using System;
 
 namespace OrderProcessing.Test
@@ -15,16 +13,15 @@ namespace OrderProcessing.Test
         {
             try
             {
-                payment = new PaymentClient(new Payment(), new Product { category = "physical", type = "book" });
-                payment.ProcessOrder();
-                Assert.IsTrue(true);
+                bool result = OrderProcessing.Program.StartOrderProcessing(1, "physical", "book");
+                Assert.AreEqual(result, true);
             }
             catch (Exception ex)
             {
                 Assert.IsTrue(false);
             }
-           
-            
+
+
         }
 
         [TestMethod]
@@ -32,9 +29,8 @@ namespace OrderProcessing.Test
         {
             try
             {
-                payment = new PaymentClient(new Payment(), new Product { category = "membership", type = "activate" });
-                payment.ProcessMembership();
-                Assert.IsTrue(true);
+                bool result = OrderProcessing.Program.StartOrderProcessing(2, "membership", "activate");
+                Assert.AreEqual(result, true);
             }
             catch
             {

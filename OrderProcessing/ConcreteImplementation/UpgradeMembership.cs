@@ -8,10 +8,24 @@ namespace OrderProcessing.ConcreteImplementation
     //concrete upgrade
     public class UpgradeMembership : Membership
     {
-        public override void Run()
+        public override bool Run()
         {
-            Console.WriteLine("Upgrade Membership");
-            base.SendEmail();
+            bool returnResult = false;
+            try
+            {
+                returnResult = base.SendEmail();
+                if (returnResult)
+                {
+                    Console.WriteLine("Upgrade Membership");
+                }
+            }
+            catch (Exception)
+            {
+                //logic to log error
+                returnResult = false;
+            }
+            return returnResult;
         }
+
     }
 }
